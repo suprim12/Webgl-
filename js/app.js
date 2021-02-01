@@ -3,6 +3,7 @@ import gsap from "gsap";
 import fragment from "./shader/fragment.glsl";
 import vertex from "./shader/vertex.glsl";
 import * as dat from "dat.gui";
+import imagesLoaded from "imagesloaded";
 let OrbitControls = require("three-orbit-controls")(THREE);
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
@@ -221,13 +222,13 @@ export default class Sketch {
   }
 }
 
-var img = document.getElementById("texture");
-let dummyimg = document.createElement("img");
-dummyimg.src = img.src;
+// Preload Images
+const preloadImages = new Promise((resolve, reject) => {
+  imagesLoaded(document.querySelectorAll("img"), { background: true }, resolve);
+});
+const preloadEverything = [preloadImages];
 
-dummyimg.onload = function () {
-  document.body.classList.remove("loading");
-  // img.style.opacity = 0;
+Promise.all(preloadEverything).then(() => {
   const scene = new Sketch();
   scene.render();
-};
+});
