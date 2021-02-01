@@ -126,9 +126,10 @@ export default class Sketch {
     this.camera.aspect = this.width / this.height;
 
     // Full Screen
-    const dist = this.camera.position.z;
-    const height = 1;
-    this.camera.fov = 2 * (180 / Math.PI) * Math.atan(height / (2 * dist));
+
+    // const dist = this.camera.position.z;
+    // const height = 1;
+    // this.camera.fov = 2 * (180 / Math.PI) * Math.atan(height / (2 * dist));
 
     // Plane Aspect
     if (this.width / this.height > 1) {
